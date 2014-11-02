@@ -17,14 +17,14 @@ namespace Primer.Controllers
 
 
         //Synchronous Action Method
-      public long GetPageSizeSync()
+/*      public long GetPageSizeSync()
         {
             WebClient wc = new WebClient();
             Stopwatch sw = Stopwatch.StartNew();
             byte[] apressData = wc.DownloadData(TargetUrl);
             Debug.WriteLine("Elapsed ms: {0}", sw.ElapsedMilliseconds);
             return apressData.LongLength;
-        }
+        }*/
 
         //Understanding Asynchronous Methods
         //Chapter 3 page 42
@@ -33,7 +33,7 @@ namespace Primer.Controllers
 
         //Asynchronous Action Method
 
-        public async Task<long> GetPageSizeAsync(CancellationToken cToken)
+        public async Task<long> GetPageSize(CancellationToken cToken)
         {
             WebClient wc = new WebClient();
             Stopwatch sw = Stopwatch.StartNew();
@@ -46,7 +46,7 @@ namespace Primer.Controllers
         //Dealing with Cancellation
         //The CancellationToken parameter is used to signal when the request has been cancelled
         //This implementation gets the content from the Apress web site ten times and averages the result.
-        public async Task<long> GetPageSize10TimesAsync(CancellationToken cToken)
+/*      public async Task<long> GetPageSize10TimesAsync(CancellationToken cToken)
         {
             WebClient wc = new WebClient();
             Stopwatch sw = Stopwatch.StartNew();
@@ -70,10 +70,10 @@ namespace Primer.Controllers
 
             Debug.WriteLine("Elapsed ms: {0}", sw.ElapsedMilliseconds);
             return (long)results.Average();
-        }
+        }*/
 
         //Creating a Self-Contained Asynchronous Method Body
-        public Task<long> GetPageSizeSelfContained(CancellationToken cToken)
+/*      public Task<long> GetPageSizeSelfContained(CancellationToken cToken)
         {
             return Task<long>.Factory.StartNew(() =>
             {
@@ -99,15 +99,15 @@ namespace Primer.Controllers
                 Debug.WriteLine("Elapsed ms: {0}", sw.ElapsedMilliseconds);
                 return (long)results.Average();
             });
-        }
+        }*/
 
 /*      The new method is written so that it can be implemented asynchronously, but my implementation in the
         controller, as shown by Listing 3-10, can do its work in a single statement.*/
-        public Task PostUrl(string newUrl, CancellationToken cToken)
+/*      public Task PostUrl(string newUrl, CancellationToken cToken)
         {
             TargetUrl = newUrl;
             return Task.FromResult<object>(null);
-        }
+        }*/
 
 /*      The static Task.FromResult<T> method is used to create a Task that is a wrapper around a specific value. The
         version I used in the listing is helpful when the method doesn’t return a value. If I had a similar method that returned
